@@ -8,7 +8,6 @@ import { test } from '@jest/globals';
 const SearchApp = () => {
     const dispatch = useDispatch();
     const {searchTerm, resultList, status} = useSelector((state: any) => state.search);
-    console.log(searchTerm);
 
     const fetchList = async (term: any) => {
         dispatch(searchWord({term : term}));

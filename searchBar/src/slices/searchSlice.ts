@@ -12,7 +12,6 @@ export const query = createAsyncThunk(
         if (queryVal.searchTerm === "")
             return
         let url = `https://www.googleapis.com/books/v1/volumes?q=${queryVal.searchTerm}&startIndex=0&maxResults=20`;
-        // console.log(url);
         const res = await fetch(url);
         return res.json()
     }
@@ -23,9 +22,7 @@ const searchSlice = createSlice({
     initialState,
     reducers: {
         searchWord: (state, action: PayloadAction<{ term: string }> ) => {
-            // console.log(action.payload.term);
             state.searchTerm = action.payload.term;
-            // console.log(state);
         }
     },
     extraReducers: (builder) => {
@@ -35,7 +32,6 @@ const searchSlice = createSlice({
         })
         .addCase(query.fulfilled, (state, action) => {
             state.status = "succeeded";
-            
             state.resultList = action.payload?.items?.map((item: any) => {
                 return {
                     value: item.id,
@@ -43,7 +39,6 @@ const searchSlice = createSlice({
                     key: item.id
                 };
             });
-            // console.log(action.payload);
         })
         .addCase(query.rejected, (state, _action) => {
             state.status = "failed";
