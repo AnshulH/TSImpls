@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import AsyncSelect from "react-select/async"
 import { query, searchWord } from '../slices/searchSlice';
 // import { fetchSearchTerm } from '../slices/searchSlice';
+import { test } from '@jest/globals';
 
 const SearchApp = () => {
     const dispatch = useDispatch();
@@ -20,8 +21,9 @@ const SearchApp = () => {
     }
 
     return (
-        <div>
+        <div title='search-box'>
             <AsyncSelect
+                id='async-select'
                 onChange={handleSearch}
                 // defaultOptions
                 onInputChange={(value, action) => {
