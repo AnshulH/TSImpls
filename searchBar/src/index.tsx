@@ -5,12 +5,14 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './store/store';
 import SearchApp from './components/SearchApp';
+import SearchAppWithoutRedux from './components/SearchAppWithoutRedux';
 
 ReactDOM.render(
   <div>
-    <Provider store={store}>
+    {/* <Provider store={store}>
       <SearchApp />
-    </Provider>
+    </Provider> */}
+    <SearchAppWithoutRedux />
   </div>,
   document.getElementById('root'),
 );
