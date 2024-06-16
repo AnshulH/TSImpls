@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import "./styles.css";
-import {debounce} from "lodash";
+// import {debounce} from "lodash";
+import debounce from "./Debounce";
+import throttle from "./Throttle";
+// import throttle from "lodash/throttle"
 
 const SearchAppWithoutRedux = () => {
-    const [searchText, setSearchText] = useState("");
-    const [searchList, setSearchList] = useState([]);
-    const [toggleDropdown, setToggleDropdown] = useState(false);
+    const [searchText, setSearchText] = useState<string>("");
+    const [searchList, setSearchList] = useState<[]>([]);
+    const [toggleDropdown, setToggleDropdown] = useState<boolean>(false);
 
     const query = async (searchTerm: String) => {
         if (searchTerm === "")
@@ -15,9 +18,9 @@ const SearchAppWithoutRedux = () => {
         return res.json()
     };
 
-    const handleSearchDebounce = React.useRef(debounce(async (value) => {
+    const handleSearchDebounce = React.useRef(throttle(async (value) => {
         getSearchList(value)
-    }, 1000)).current;
+    }, 300)).current;
 
     let getSearchList = async (searchText: String) => {
         setSearchList([]);
@@ -69,7 +72,9 @@ const SearchAppWithoutRedux = () => {
                     <div className={`options open`} >
                         {searchList?.map( (searchVal : any) => {
                         return (
-                            <div className="dropdown-option" id={searchVal?.value} onClick={(event) => {selectOption(event, searchVal?.label)}}>
+                            <div className="dropdown-option" 
+                                id={searchVal?.value} 
+                                onClick={(event) => {selectOption(event, searchVal?.label)}}>
                                 {searchVal.label}       
                             </div>
                         )})}
